@@ -12,7 +12,6 @@
         android:layout_width="79dp"
         android:layout_height="58dp"
         android:text="@string/tela2"
-        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="290dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
