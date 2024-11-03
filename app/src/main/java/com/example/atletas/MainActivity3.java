@@ -50,7 +50,6 @@ public class MainActivity3 extends AppCompatActivity {
             Intent i = new Intent(this, MainActivity3.class);
             this.startActivity(i);
             this.finish();
-
             return true;
         }
         return super.onOptionsItemSelected(item);

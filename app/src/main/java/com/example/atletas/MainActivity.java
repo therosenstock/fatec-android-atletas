@@ -37,24 +37,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        Bundle bundle = new Bundle();
+        Intent i = new Intent(this, MainActivity.class);
         if( id == R.id.act1){
-            Intent i = new Intent(this, MainActivity.class);
+            bundle.putString("tipo", "senior");
+            i.putExtras(bundle);
             this.startActivity(i);
             this.finish();
             return true;
         }
         if( id == R.id.act2){
-            Intent i = new Intent(this, MainActivity2.class);
+            bundle.putString("tipo", "juvenil");
+            i.putExtras(bundle);
             this.startActivity(i);
             this.finish();
-
             return true;
         }
         if( id == R.id.act3){
-            Intent i = new Intent(this, MainActivity3.class);
+            bundle.putString("tipo", "outro");
+            i.putExtras(bundle);
             this.startActivity(i);
             this.finish();
-
             return true;
         }
         return super.onOptionsItemSelected(item);

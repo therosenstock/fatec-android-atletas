@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AtletaSeniorFragment">
+
+    <EditText
+        android:id="@+id/txtNome"
+        android:layout_width="355dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtDataNascimento"
+        android:layout_width="356dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="@string/data_nascimento"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="107dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txtBairro"
+        android:layout_width="352dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:hint="@string/bairro"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="172dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkCardiaco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/problemas_cardiacos"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="239dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastrar"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="341dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtResultado"
+        android:layout_width="315dp"
+        android:layout_height="165dp"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="438dp"
+        tools:ignore="MissingConstraints"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,19 @@
     <string name="tela1">Tela 1</string>
     <string name="tela2">Tela 2</string>
     <string name="tela3">Tela 3</string>
+    <string name="nome">Nome</string>
+    <string name="data_nascimento">Data de Nascimento</string>
+    <string name="bairro">Bairro</string>
+    <string name="anos_praticando">Quantidade de anos praticando o esporte</string>
+    <string name="problemas_cardiacos">Problemas cardíacos?</string>
+    <string name="academia">Academia</string>
+    <string name="recorde_segundos">Recorde em segundos</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="atleta_juvenil">Atleta Juvenil</string>
+    <string name="atleta_senior">Atleta Sênior</string>
+    <string name="outro_atleta">Outro Atleta</string>
+    <string name="escolha">Escolha</string>
+    <string name="toast_atleta_cadastrado">Atleta cadastrado com sucesso!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
