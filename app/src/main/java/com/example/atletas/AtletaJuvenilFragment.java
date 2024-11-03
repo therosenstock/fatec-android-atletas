@@ -7,6 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.atletas.controller.IOperacao;
+import com.example.atletas.controller.OperacaoJuvenil;
+import com.example.atletas.controller.OperacaoSenior;
+import com.example.atletas.model.Juvenil;
+import com.example.atletas.model.Senior;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +39,11 @@ public class AtletaJuvenilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View view;
+    private EditText txtNome, txtData, txtBairro, txtAnos;
+    private Button btnCadastrar;
+    TextView txtResultado;
 
     public AtletaJuvenilFragment() {
         // Required empty public constructor
@@ -58,7 +79,54 @@ public class AtletaJuvenilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_atleta_juvenil, container, false);
+        view = inflater.inflate(R.layout.fragment_atleta_juvenil, container, false);
+
+        txtNome = view.findViewById(R.id.txtNome);
+        txtData = view.findViewById(R.id.txtDataNascimento);
+        txtBairro = view.findViewById(R.id.txtBairro);
+        btnCadastrar = view.findViewById(R.id.btnCadastrar);
+        txtAnos = view.findViewById(R.id.txtAnosPratica);
+        txtResultado = view.findViewById(R.id.txtResultado);
+        btnCadastrar.setOnClickListener(op -> cadastrar());
+        return view;
+    }
+
+    private void cadastrar() {
+        Juvenil j = new Juvenil();
+        j.setNome(txtNome.getText().toString());
+        j.setBairro(txtBairro.getText().toString());
+        String data = txtData.getText().toString();
+        Date date = convertStringToDate(data);
+        j.setAnosPratica(Integer.parseInt(txtAnos.getText().toString()));
+        j.setNascimento(date);
+
+        IOperacao op = new OperacaoJuvenil();
+        op.cadastrar(j);
+        List<Juvenil> lista = op.listar();
+        StringBuffer buffer = new StringBuffer();
+        for(Juvenil ju: lista){
+            buffer.append(ju.toString() + "\n");
+        }
+
+        Toast.makeText(view.getContext(), buffer.toString(), Toast.LENGTH_LONG).show();
+        txtResultado.setText(buffer.toString()) ;
+        limpaCampos();
+    }
+
+    private void limpaCampos() {
+        txtNome.setText("");
+        txtBairro.setText("");
+        txtData.setText("");
+        txtAnos.setText("");
+    }
+
+    private Date convertStringToDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

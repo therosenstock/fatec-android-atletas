@@ -7,6 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.atletas.controller.IOperacao;
+import com.example.atletas.controller.OperacaoAdulto;
+import com.example.atletas.controller.OperacaoSenior;
+import com.example.atletas.model.Adulto;
+import com.example.atletas.model.Senior;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +39,12 @@ public class AtletaAdultoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private View view;
+    private EditText txtNome, txtData, txtBairro, txtAcademia, txtRecorde;
+    private Button btnCadastrar;
+    TextView txtResultado;
 
     public AtletaAdultoFragment() {
         // Required empty public constructor
@@ -59,6 +81,58 @@ public class AtletaAdultoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_atleta_adulto, container, false);
+        view = inflater.inflate(R.layout.fragment_atleta_adulto, container, false);
+
+        txtNome = view.findViewById(R.id.txtNome);
+        txtData = view.findViewById(R.id.txtDataNascimento);
+        txtBairro = view.findViewById(R.id.txtBairro);
+        txtAcademia = view.findViewById(R.id.txtAcademia);
+        txtRecorde = view.findViewById(R.id.txtRecorde);
+        btnCadastrar = view.findViewById(R.id.btnCadastrar);
+
+        txtResultado = view.findViewById(R.id.txtResultado);
+        btnCadastrar.setOnClickListener(op -> cadastrar());
+        return view;
+
+    }
+
+    private void cadastrar() {
+        Adulto a = new Adulto();
+        a.setNome(txtNome.getText().toString());
+        a.setBairro(txtBairro.getText().toString());
+        String data = txtData.getText().toString();
+        Date date = convertStringToDate(data);
+        a.setAcademia(txtAcademia.getText().toString());
+        a.setRecorde(Double.parseDouble(txtRecorde.getText().toString()));
+        a.setNascimento(date);
+
+        IOperacao op = new OperacaoAdulto();
+        op.cadastrar(a);
+        List<Adulto> lista = op.listar();
+        StringBuffer buffer = new StringBuffer();
+        for(Adulto ad: lista){
+            buffer.append(ad.toString() + "\n");
+        }
+        Toast.makeText(view.getContext(), buffer.toString(), Toast.LENGTH_LONG).show();
+        txtResultado.setText(buffer.toString()) ;
+        limpaCampos();
+    }
+
+    private void limpaCampos() {
+        txtNome.setText("");
+        txtBairro.setText("");
+        txtData.setText("");
+        txtAcademia.setText("");
+        txtRecorde.setText("");
+    }
+
+    private Date convertStringToDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

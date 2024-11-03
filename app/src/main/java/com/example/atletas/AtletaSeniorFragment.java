@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.atletas.controller.IOperacao;
 import com.example.atletas.controller.OperacaoSenior;
@@ -78,7 +79,7 @@ public class AtletaSeniorFragment extends Fragment {
         txtBairro = view.findViewById(R.id.txtBairro);
         btnCadastrar = view.findViewById(R.id.btnCadastrar);
         checkCardiaco = view.findViewById(R.id.checkCardiaco);
-        txtResultado = view.findViewById(R.id.textView);
+        txtResultado = view.findViewById(R.id.txtResultado);
         btnCadastrar.setOnClickListener(op -> cadastrar());
         return view;
 
@@ -90,6 +91,7 @@ public class AtletaSeniorFragment extends Fragment {
         s.setBairro(txtBairro.getText().toString());
         String data = txtData.getText().toString();
         Date date = convertStringToDate(data);
+        s.setCardiaco(checkCardiaco.isChecked());
         s.setNascimento(date);
 
         IOperacao op = new OperacaoSenior();
@@ -99,12 +101,16 @@ public class AtletaSeniorFragment extends Fragment {
         for(Senior se: lista){
             buffer.append(se.toString() + "\n");
         }
-
+        Toast.makeText(view.getContext(), buffer.toString(), Toast.LENGTH_LONG).show();
         txtResultado.setText(buffer.toString()) ;
         limpaCampos();
     }
 
     private void limpaCampos() {
+        txtNome.setText("");
+        txtBairro.setText("");
+        txtData.setText("");
+        checkCardiaco.setChecked(false);
     }
 
     private Date convertStringToDate(String dateString) {

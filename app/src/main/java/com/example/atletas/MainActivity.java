@@ -11,11 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
     /*
      *@author:<Fabiola Rodrigues dos Santos / RA: 1110482313011>
      */
+
+    Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,26 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            carregaFragment(bundle);
+        }
+    }
+
+    private void carregaFragment(Bundle bundle) {
+        String tipo = bundle.getString("tipo");
+        if(tipo.equals("senior")){
+            fragment = new AtletaSeniorFragment();
+        } else if(tipo.equals("juvenil")){
+            fragment = new AtletaJuvenilFragment();
+        } else{
+            fragment = new AtletaAdultoFragment();
+        }
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment, fragment);
+        ft.commit();
     }
 
     @Override
